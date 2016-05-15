@@ -67,13 +67,13 @@ public class SolarSystem : MonoBehaviour {
             p.orbitSpeed = orbitalPeriod / def.orbitSpeed;
             p.spinDirection = def.spinDirection;
             p.spinSpeed = def.spinSpeed;
+
             var scale = basePlanetScale * def.scale;
             p.transform.localScale += new Vector3(scale, scale, scale);
 
             var mat = new Material(planetMaterial);
             mat.color = def.materialColor;
             p.GetComponent<MeshRenderer>().material = mat;
-
 
             planets.Add(p);
         }
