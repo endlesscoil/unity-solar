@@ -22,7 +22,7 @@ public class Planet : MonoBehaviour {
 
 	void Start () {
         transform.parent = parentStar.transform;
-        transform.localPosition = new Vector3(orbitDistance, 0f, 0f);
+        transform.localPosition = new Vector3(orbitDistance / parentStar.transform.localScale.x, 0f, 0f);
         
         lineRenderer = GetComponent<LineRenderer>();
 	}
@@ -32,12 +32,14 @@ public class Planet : MonoBehaviour {
         theta = 0f;
         size = (int)((1f / thetaScale) + 1f);
         lineRenderer.SetVertexCount(size);
+
+        var parentScale = transform.parent.localScale;
         for (int i = 0; i < size; i++)
         {
             theta += (2f * Mathf.PI * thetaScale);
-            float x = orbitDistance * Mathf.Cos(theta);
-            float z = orbitDistance * Mathf.Sin(theta);
-            lineRenderer.SetPosition(i, new Vector3(x, 0, z));
+            float x = orbitDistance / parentScale.x * Mathf.Cos(theta);
+            float z = orbitDistance / parentScale.z * Mathf.Sin(theta);
+            lineRenderer.SetPosition(i, new Vector3(parentScale.x * x, 0, parentScale.z * z));
         }
     }
 	

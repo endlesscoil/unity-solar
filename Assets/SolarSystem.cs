@@ -55,6 +55,7 @@ public class SolarSystem : MonoBehaviour {
     // Use this for initialization
     void Start () {
         sun = Instantiate<Sun>(sunPrefab);
+        sun.transform.localScale += new Vector3(10, 10, 10);
 
         for (int i = 0; i < planetDefinitions.Length; i++)
         {
